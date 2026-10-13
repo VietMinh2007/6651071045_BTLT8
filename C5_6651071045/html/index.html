@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tech Gear - Shop phụ kiện điện thoại: ốp lưng, tai nghe, sạc, cáp chính hãng. Giỏ hàng động với Vue.js 3.">
+  <title>Tech Gear - Phụ kiện điện thoại</title>
+
+  <!-- Bootstrap CSS trước, style.css sau để override đúng cách -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ============ HEADER + NAVIGATION ============ -->
+    <header class="site-header sticky-top bg-white">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <!-- Logo: pin có tia sét (SVG) -->
+            <svg class="brand-logo" viewBox="0 0 64 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="3" width="54" height="30" rx="7" fill="none" stroke="#1f2937" stroke-width="3"/>
+              <rect x="57" y="12" width="6" height="12" rx="2" fill="#1f2937"/>
+              <rect x="6" y="7" width="46" height="22" rx="4" fill="#1d4ed8"/>
+              <path d="M32 8 L20 20 H28 L25 29 L39 16 H31 Z" fill="#fff"/>
+            </svg>
+            <span class="brand-text">
+              <span class="brand-sub">TECH GEAR - ACCESSORIES</span>
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-uppercase fw-semibold small">
+              <li class="nav-item"><a class="nav-link active" href="#top">Trang chủ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#san-pham">Sản phẩm</a></li>
+              <li class="nav-item"><a class="nav-link" href="#khuyen-mai">Khuyến mãi</a></li>
+              <li class="nav-item"><a class="nav-link" href="#lien-he">Liên hệ</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-3">
+              <!-- Icon giỏ hàng: SỐ LƯỢNG do Vue quản lý bằng {{ }} -->
+              <a href="#gio-hang" class="cart-btn position-relative text-decoration-none">
+                <i class="bi bi-cart3"></i>
+                <span class="cart-badge">{{ cartCount }}</span>
+                <span class="d-none d-md-inline ms-2 small fw-semibold text-dark">Giỏ hàng ({{ cartCount }})</span>
+              </a>
+              <!-- Ô tìm kiếm: v-model liên kết 2 chiều với tuKhoa -->
+              <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="search" class="form-control form-control-sm" placeholder="Tìm sản phẩm..."
+                       v-model="tuKhoa" aria-label="Tìm kiếm sản phẩm">
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-4" id="top">
+      <div class="row g-4">
+
+        <!-- ============ SECTION SẢN PHẨM (cột chính) ============ -->
+        <section class="col-lg-8 col-xl-9" id="san-pham">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h4 fw-bold m-0">Sản phẩm</h2>
+            <small class="text-muted">{{ danhSachLoc.length }} / {{ products.length }} sản phẩm</small>
+          </div>
+
+          <div class="row g-3">
+            <!-- v-for: Vue tự lặp render, mỗi sản phẩm là 1 ARTICLE -->
+            <div class="col-6 col-md-4 col-xl-3" v-for="sp in danhSachLoc" :key="sp.id">
+              <article class="product-card card h-100">
+                <div class="product-img">
+                  <img :src="sp.anh" :alt="sp.ten" class="card-img-top" @error="anhLoi($event, sp.ten)">
+                </div>
+                <div class="card-body p-2 d-flex flex-column">
+                  <h3 class="product-name">{{ sp.ten }}</h3>
+                  <p class="product-desc">{{ sp.moTa }}</p>
+                  <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span class="product-price">{{ dinhDangGia(sp.gia) }}</span>
+                    <button class="btn btn-add" @click="themVaoGio(sp)" :aria-label="'Thêm ' + sp.ten + ' vào giỏ'">
+                      <i class="bi bi-cart-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Thông báo khi không có kết quả tìm kiếm -->
+          <div v-if="danhSachLoc.length === 0" class="alert alert-light text-center border mt-3">
+            Không tìm thấy sản phẩm nào khớp với "<strong>{{ tuKhoa }}</strong>".
+          </div>
+        </section>
+
+        <!-- ============ ASIDE GIỎ HÀNG ============ -->
+        <aside class="col-lg-4 col-xl-3" id="gio-hang">
+          <div class="cart-panel sticky-aside">
+            <h2 class="cart-title">YOUR CART</h2>
+            <p class="cart-sub">Giỏ hàng của bạn</p>
+
+            <!-- v-if: giỏ trống -->
+            <div v-if="cart.length === 0" class="cart-empty">
+              <i class="bi bi-bag-x"></i>
+              <p class="mb-0">Giỏ hàng trống</p>
+            </div>
+
+            <!-- v-else: v-for liệt kê từng sản phẩm đã thêm -->
+            <ul v-else class="list-unstyled m-0 cart-list">
+              <li class="cart-item" v-for="(item, index) in cart" :key="index">
+                <img :src="item.anh" :alt="item.ten" @error="anhLoi($event, item.ten)">
+                <div class="flex-grow-1">
+                  <div class="cart-item-name">{{ item.ten }}</div>
+                  <div class="cart-item-price">{{ dinhDangGia(item.gia) }}</div>
+                </div>
+                <button class="btn-remove" @click="xoaKhoiGio(index)" aria-label="Xoá khỏi giỏ">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </li>
+            </ul>
+
+            <div class="cart-total d-flex justify-content-between">
+              <span>TOTAL</span>
+              <span>{{ dinhDangGia(tongTien) }}</span>
+            </div>
+            <button class="btn btn-checkout w-100" :disabled="cart.length === 0">
+              CHECKOUT<small>Thanh toán</small>
+            </button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ============ SECTION KHUYẾN MÃI (tĩnh) ============ -->
+    <section class="promo-banner text-center text-white" id="khuyen-mai">
+      <div class="container">
+        <h2 class="promo-title">GET 20% OFF ALL CASES! LIMITED TIME OFFER</h2>
+        <p class="mb-0 small">Giảm 20% toàn bộ ốp lưng • Freeship đơn từ 500.000đ trong tuần này</p>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer" id="lien-he">
+      <div class="container py-4">
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <h3 class="footer-title">About</h3>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">Về chúng tôi</a></li>
+              <li><a href="#">Liên hệ</a></li>
+              <li><a href="#">Tai nghe</a></li>
+              <li><a href="#">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h3 class="footer-title">Support</h3>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">Bảo hành</a></li>
+              <li><a href="#">Vận chuyển</a></li>
+              <li><a href="#">Hỗ trợ</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h3 class="footer-title">Liên hệ</h3>
+            <ul class="list-unstyled footer-links">
+              <li>123 Đường ABC, Q.1, TP.HCM</li>
+              <li>0901 234 567</li>
+              <li>hello@techgear.vn</li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3 text-md-end">
+            <h3 class="footer-title">Mạng xã hội</h3>
+            <div class="social d-flex gap-3 justify-content-md-end">
+              <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+              <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <p class="text-center small mt-4 mb-0 copyright">&copy; 2026 Tech Gear. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Thứ tự bắt buộc: Bootstrap bundle -> Vue 3 CDN -> app.js (Vue phải có trước khi gọi Vue.createApp) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>

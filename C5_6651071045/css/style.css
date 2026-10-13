@@ -1,0 +1,86 @@
+/* =====================================================
+   style.css - CSS tuỳ biến cho Tech Gear (Bootstrap 5)
+   Nạp SAU Bootstrap để ghi đè đúng thứ tự.
+   ===================================================== */
+:root {
+  --tg-blue: #1d4ed8;
+  --tg-blue-dark: #1e3a8a;
+  --tg-ink: #111827;
+}
+
+body { background: #fff; color: var(--tg-ink); font-family: "Segoe UI", system-ui, sans-serif; scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+
+/* ---------- Header ---------- */
+.site-header { border-bottom: 1px solid #eef0f4; z-index: 1030; }
+.brand-logo { width: 54px; height: 30px; }
+.brand-sub { font-size: .62rem; font-weight: 700; letter-spacing: .5px; color: var(--tg-ink); }
+/* Override Bootstrap .nav-link: màu & trạng thái active */
+.navbar .nav-link { color: #374151; padding: .5rem .9rem; }
+.navbar .nav-link:hover, .navbar .nav-link.active { color: var(--tg-blue); }
+
+.cart-btn { font-size: 1.35rem; color: var(--tg-blue); display: inline-flex; align-items: center; }
+.cart-btn > i {
+  background: var(--tg-blue); color: #fff; border-radius: 8px; width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.05rem;
+}
+.cart-badge {
+  position: absolute; top: -6px; left: 22px; min-width: 18px; height: 18px; padding: 0 4px;
+  border-radius: 999px; background: #ef4444; color: #fff; font-size: .68rem; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.search-box { position: relative; }
+.search-box i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: .8rem; }
+.search-box .form-control { padding-left: 28px; border-radius: 999px; width: 170px; }
+
+/* ---------- Sản phẩm (override .card của Bootstrap) ---------- */
+.product-card { border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden; transition: transform .15s, box-shadow .15s; }
+.product-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(29, 78, 216, .15); }
+.product-img { background: #eef2f9; padding: 8px; aspect-ratio: 1 / 1; }
+.product-img img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.product-name { font-size: .78rem; font-weight: 700; text-transform: uppercase; margin: .4rem 0 .2rem; line-height: 1.25; }
+.product-desc { font-size: .7rem; color: #6b7280; margin-bottom: .5rem; }
+.product-price { font-size: .82rem; font-weight: 800; }
+.btn-add { background: var(--tg-blue); color: #fff; border-radius: 8px; width: 32px; height: 32px; padding: 0; line-height: 1; }
+.btn-add:hover { background: var(--tg-blue-dark); color: #fff; }
+
+/* ---------- Giỏ hàng (aside) ---------- */
+.sticky-aside { position: sticky; top: 86px; }
+.cart-panel { background: #eef2f9; border-radius: 16px; padding: 1rem; box-shadow: 0 4px 14px rgba(0, 0, 0, .06); }
+.cart-title { font-size: 1rem; font-weight: 800; margin: 0; }
+.cart-sub { font-size: .72rem; color: #6b7280; margin-bottom: .75rem; }
+.cart-empty { text-align: center; padding: 1.5rem 0; color: #6b7280; }
+.cart-empty i { font-size: 2rem; display: block; }
+.cart-list { max-height: 340px; overflow-y: auto; }
+.cart-item { display: flex; align-items: center; gap: .6rem; padding: .4rem; margin-bottom: .5rem; background: #fff; border-radius: 10px; }
+.cart-item img { width: 40px; height: 40px; object-fit: contain; background: #eef2f9; border-radius: 6px; }
+.cart-item-name { font-size: .7rem; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
+.cart-item-price { font-size: .7rem; color: #4b5563; }
+.btn-remove { background: #ef4444; color: #fff; border: 0; border-radius: 50%; width: 22px; height: 22px; font-size: .6rem; display: inline-flex; align-items: center; justify-content: center; }
+.btn-remove:hover { background: #b91c1c; }
+.cart-total { margin: .75rem 0; padding-top: .6rem; border-top: 1px solid #d5dce8; font-weight: 800; font-size: .85rem; }
+.cart-total span:last-child { color: var(--tg-blue); }
+/* Override .btn của Bootstrap cho nút Checkout */
+.btn-checkout { background: linear-gradient(90deg, #3b82f6, #6366f1); color: #fff; border-radius: 999px; font-weight: 700; display: flex; flex-direction: column; line-height: 1.1; padding: .45rem; }
+.btn-checkout small { font-size: .62rem; font-weight: 400; opacity: .9; }
+.btn-checkout:hover { color: #fff; filter: brightness(1.08); }
+.btn-checkout:disabled { background: #9ca3af; opacity: .7; }
+
+/* ---------- Khuyến mãi ---------- */
+.promo-banner { background: linear-gradient(90deg, #3b82f6, #7c3aed); padding: 1.1rem 0; margin-top: 1.5rem; }
+.promo-title { font-size: 1.15rem; font-weight: 800; letter-spacing: .5px; margin: 0 0 .25rem; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: #1f2124; color: #d1d5db; }
+.footer-title { font-size: .8rem; font-weight: 800; text-transform: uppercase; color: #fff; margin-bottom: .6rem; }
+.footer-links li { font-size: .78rem; margin-bottom: .25rem; }
+.footer-links a { color: #aab1bd; text-decoration: none; }
+.footer-links a:hover { color: #fff; }
+.social a { color: #fff; font-size: 1.1rem; }
+.social a:hover { color: #60a5fa; }
+.copyright { color: #8b93a1; }
+
+@media (max-width: 991.98px) {
+  .search-box .form-control { width: 100%; }
+  .sticky-aside { position: static; }
+}

@@ -1,0 +1,10 @@
+/* CSS bổ sung cho phần Tailwind chưa hỗ trợ sẵn */
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+.font-logo { font-family: 'Dancing Script', cursive; }          /* font chữ logo */
+.font-serif-display { font-family: 'Lora', Georgia, serif; }    /* font tiêu đề */
+body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+/* Animation tuỳ biến: hero hiện dần khi tải trang */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+#trang-chu { animation: rise .7s ease-out both; }
+@media (prefers-reduced-motion: reduce) { #trang-chu { animation: none; } html { scroll-behavior: auto; } }

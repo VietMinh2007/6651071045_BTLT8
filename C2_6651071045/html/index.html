@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bếp Bánh - tiệm bánh ngọt homemade tại TP.HCM, làm thủ công mỗi ngày, nhận đặt bánh theo yêu cầu.">
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+  <title>Bếp Bánh - Bánh ngọt homemade</title>
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-orange-50 text-stone-700">
+
+  <!-- HEADER + NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm">
+    <nav class="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+      <a href="#trang-chu" aria-label="Bếp Bánh - Trang chủ"><img src="../images/logo.svg" alt="Logo Bếp Bánh Homemade" class="h-12 w-auto"></a>
+      <div class="hidden md:flex gap-6 text-sm"><a href="#trang-chu" class="hover:text-amber-700 transition">Trang chủ</a><a href="#menu" class="hover:text-amber-700 transition">Bánh ngọt</a><a href="#cau-chuyen" class="hover:text-amber-700 transition">Câu chuyện</a><a href="#dat-banh" class="hover:text-amber-700 transition">Đặt bánh</a><a href="#lien-he" class="hover:text-amber-700 transition">Liên hệ</a></div>
+      <button id="menu-btn" class="md:hidden p-2" aria-label="Mở menu" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden flex-col md:hidden bg-white text-sm"><a href="#trang-chu" class="px-6 py-3 border-t border-amber-100 hover:bg-amber-50">Trang chủ</a><a href="#menu" class="px-6 py-3 border-t border-amber-100 hover:bg-amber-50">Bánh ngọt</a><a href="#cau-chuyen" class="px-6 py-3 border-t border-amber-100 hover:bg-amber-50">Câu chuyện</a><a href="#dat-banh" class="px-6 py-3 border-t border-amber-100 hover:bg-amber-50">Đặt bánh</a><a href="#lien-he" class="px-6 py-3 border-t border-amber-100 hover:bg-amber-50">Liên hệ</a></div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6">
+
+    <!-- SECTION HERO -->
+    <section id="trang-chu" class="flex flex-col md:flex-row items-center gap-8 py-12">
+      <div class="md:w-1/2">
+        <h1 class="font-serif-display text-4xl md:text-6xl font-bold text-stone-900 leading-tight">Hương vị thủ công chân thành</h1>
+        <p class="mt-4 text-stone-600 max-w-md">Từng chiếc bánh được nướng mỗi sáng bằng bơ thật và trái cây tươi, giao tận nhà trong ngày.</p>
+        <a href="#menu" class="inline-block mt-6 bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-full transition">Đặt ngay</a>
+      </div>
+      <img src="../images/banh.png" alt="Bánh kem trái cây" class="md:w-1/2 w-full rounded-3xl shadow-lg">
+    </section>
+
+    <!-- Bố cục chính: nội dung (2/3) + aside (1/3) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
+      <div class="lg:col-span-2">
+
+        <!--
+          GHI CHÚ SO SÁNH: Ở bài này mỗi thẻ bánh được TỰ PHỐI từ các utility nhỏ
+          (rounded-2xl, shadow-lg, overflow-hidden, bg-white, hover:shadow-xl...) - triết lý "utility-first".
+          Khác Bài 1: Bootstrap có sẵn component "card" (class card, card-body...) - triết lý "component-based".
+        -->
+        <!-- SECTION MENU BÁNH -->
+        <section id="menu">
+          <h2 class="font-serif-display text-2xl font-bold text-stone-900 mb-4">Menu bánh</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_1.png" alt="Bánh Bông Lan Trứng Muối" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Bánh Bông Lan Trứng Muối</h3>
+              <p class="text-sm text-stone-500 mt-1">Cốt bánh mềm xốp, sợi chà bông và sốt trứng muối béo mặn.</p>
+              <p class="mt-3 font-bold text-amber-700">350.000 đ</p>
+            </div>
+          </article>
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_2.png" alt="Bánh Tart Trái Cây" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Bánh Tart Trái Cây</h3>
+              <p class="text-sm text-stone-500 mt-1">Vỏ tart giòn bơ, kem custard và trái cây tươi theo mùa.</p>
+              <p class="mt-3 font-bold text-amber-700">250.000 đ</p>
+            </div>
+          </article>
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_3.png" alt="Cookies Trà Xanh" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Cookies Trà Xanh</h3>
+              <p class="text-sm text-stone-500 mt-1">Matcha Nhật, socola trắng, nướng giòn rìa mềm giữa.</p>
+              <p class="mt-3 font-bold text-amber-700">350.000 đ</p>
+            </div>
+          </article>
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_4.png" alt="Bánh Kem Cam Tươi" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Bánh Kem Cam Tươi</h3>
+              <p class="text-sm text-stone-500 mt-1">Bông lan cam vàng, kem tươi nhẹ, vỏ cam sấy.</p>
+              <p class="mt-3 font-bold text-amber-700">320.000 đ</p>
+            </div>
+          </article>
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_5.png" alt="Red Velvet Dâu" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Red Velvet Dâu</h3>
+              <p class="text-sm text-stone-500 mt-1">Cốt đỏ nhung, phô mai kem, dâu tây phủ trên mặt.</p>
+              <p class="mt-3 font-bold text-amber-700">380.000 đ</p>
+            </div>
+          </article>
+          <article class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition">
+            <img src="../images/banh_6.png" alt="Bánh Socola Hạt Dẻ" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-stone-800">Bánh Socola Hạt Dẻ</h3>
+              <p class="text-sm text-stone-500 mt-1">Socola đen 60%, ganache mịn, hạt dẻ rang.</p>
+              <p class="mt-3 font-bold text-amber-700">340.000 đ</p>
+            </div>
+          </article>
+          </div>
+        </section>
+
+        <!-- SECTION CÂU CHUYỆN THƯƠNG HIỆU -->
+        <section id="cau-chuyen" class="mt-12 flex flex-col md:flex-row gap-6 items-center">
+          <img src="../images/bep.png" alt="Bếp bánh buổi sáng" class="md:w-2/5 w-full rounded-2xl shadow-lg">
+          <div>
+            <h2 class="font-serif-display text-2xl font-bold text-stone-900 mb-3">Câu chuyện thương hiệu</h2>
+            <p class="leading-relaxed">Bếp Bánh bắt đầu từ góc bếp nhỏ của bà chủ, nơi công thức được truyền lại qua nhiều năm. Chúng tôi chọn <strong class="text-amber-700 font-semibold">bơ nhập khẩu</strong>, trứng tươi mỗi ngày và <em class="text-amber-700 font-semibold">không dùng chất bảo quản</em>. Mỗi chiếc bánh ra lò đều được nếm thử trước khi đến tay bạn.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- ASIDE ĐẶT BÁNH THEO YÊU CẦU -->
+      <aside id="dat-banh" class="lg:col-span-1 bg-amber-50 border border-amber-200 rounded-xl p-6 h-fit lg:sticky lg:top-24">
+        <h2 class="font-serif-display text-xl font-bold text-stone-900 mb-4">Đặt bánh theo yêu cầu</h2>
+        <!-- FORM ĐẶT BÁNH -->
+        <form action="#" method="post" class="space-y-3">
+          <input type="text" name="ten" placeholder="Tên của bạn" required class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="tel" name="sdt" placeholder="Số điện thoại" required class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" name="loai" placeholder="Loại bánh yêu cầu" class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <textarea name="ghichu" rows="4" placeholder="Ghi chú (kích cỡ, ngày nhận, nội dung viết trên bánh...)" class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+          <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-full transition">Gửi yêu cầu</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="lien-he" class="bg-stone-900 text-stone-200">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+      <div><img src="../images/logo-light.svg" alt="Logo Bếp Bánh Homemade" class="h-14 w-auto mb-3"><p>Tiệm bánh Homemade, nướng thủ công mỗi ngày.</p></div>
+      <div><h3 class="font-semibold mb-2">Liên hệ</h3><p> Quận 1, TP.HCM</p><p>0901 234 567</p><p>lienhe@bepbanh.com</p></div>
+      <div><h3 class="font-semibold mb-2">Giờ mở cửa</h3><p>Thứ 2 - Thứ 6: 7:00 - 20:00</p><p>Thứ 7 - Chủ nhật: 8:00 - 21:00</p></div>
+      <div><h3 class="font-semibold mb-2">Mạng xã hội</h3><p><a href="#" class="hover:text-amber-500">Facebook</a></p><p><a href="#" class="hover:text-amber-500">Instagram</a></p></div>
+    </div>
+    <p class="border-t border-stone-700 text-center text-xs py-4">© 2026 Bếp Bánh. Bảo lưu mọi quyền.</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
